@@ -14,8 +14,13 @@ import {
   Github, Linkedin, Mail, ExternalLink, Code, Database, Globe, Download, MapPin,
   GraduationCap, Briefcase, Instagram, Sparkles, ArrowRight, Star, Clock, Award,
   Terminal, Brain, Cloud, Wrench, Menu, User, Code2, FolderKanban, Contact, Globe2,
-  Home, Zap, Heart, Lightbulb, ChevronLeft, ChevronRight, X, Loader
+  Home, Zap, Heart, Lightbulb, ChevronLeft, ChevronRight, X, Loader, Bot, Cpu, Palette, Eye
 } from "lucide-react"
+import dynamic from "next/dynamic"
+
+const RobotCanvas = dynamic(() => import("@/components/three-robot").then((mod) => mod.RobotCanvas), {
+  ssr: false,
+})
 
 type Language = "en" | "hi" | "kn"
 type Project = {
@@ -163,7 +168,10 @@ export default function Portfolio() {
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
       const element = document.getElementById(sectionId)
-      if (element) window.scrollTo({ top: element.offsetTop - 80, behavior: "smooth" })
+      if (element) {
+        const top = element.getBoundingClientRect().top + window.pageYOffset - 80
+        window.scrollTo({ top, behavior: "smooth" })
+      }
     }
   }
 
@@ -180,10 +188,10 @@ export default function Portfolio() {
       // Send email with suggestion
       const encodedMessage = encodeURIComponent(`User Suggestion:\n\n${suggestionMessage}`)
       window.location.href = `mailto:snischith07@gmail.com?subject=Portfolio Suggestion&body=${encodedMessage}`
-      
+
       // Show thank you message
       setSuggestionSubmitted(true)
-      
+
       // Reset after 2 seconds
       setTimeout(() => {
         setSuggestionMessage("")
@@ -225,9 +233,9 @@ export default function Portfolio() {
   ]
 
   const languagesKnown = [
-    { name: t.kannada || "Kannada", level: "Native" },
     { name: t.english || "English", level: "Professional" },
     { name: t.hindi || "Hindi", level: "Professional" },
+    { name: t.kannada || "Kannada", level: "Native" }
   ]
 
   const whatIDoItems = [
@@ -248,7 +256,7 @@ export default function Portfolio() {
           <div className="flex justify-between items-center">
             <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">NISCHITH.S</h1>
             <div className="hidden lg:flex space-x-1">
-              {[{id:"home",label:t.home,icon:Home},{id:"about",label:t.aboutMe,icon:User},{id:"skills",label:t.technicalSkills,icon:Code2},{id:"projects",label:t.featuredProjects,icon:FolderKanban},{id:"contact",label:"Contact",icon:Contact}].map((item) => (
+              {[{ id: "home", label: t.home, icon: Home }, { id: "about", label: t.aboutMe, icon: User }, { id: "skills", label: t.technicalSkills, icon: Code2 }, { id: "projects", label: t.featuredProjects, icon: FolderKanban }, { id: "contact", label: "Contact", icon: Contact }].map((item) => (
                 <button key={item.id} onClick={() => scrollToSection(item.id)} className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeSection === item.id ? "bg-primary text-white shadow-lg shadow-primary/25" : "text-muted-foreground hover:text-foreground hover:bg-muted"}`}>
                   <item.icon className="w-4 h-4" /><span>{item.label}</span>
                 </button>
@@ -282,15 +290,15 @@ export default function Portfolio() {
                     <h2 className="text-xl font-bold">Nischith S</h2>
                   </div>
                   <div className="flex flex-col space-y-2">
-                    {[{id:"home",label:t.home,icon:Home},{id:"about",label:t.aboutMe,icon:User},{id:"skills",label:t.technicalSkills,icon:Code2},{id:"projects",label:t.featuredProjects,icon:FolderKanban},{id:"contact",label:"Contact",icon:Contact}].map((item) => (
-                      <button key={item.id} onClick={() => {scrollToSection(item.id); setMobileMenuOpen(false)}} className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-left font-medium transition-all duration-300 ${activeSection === item.id ? "bg-primary text-white" : "text-muted-foreground hover:bg-muted"}`}>
+                    {[{ id: "home", label: t.home, icon: Home }, { id: "about", label: t.aboutMe, icon: User }, { id: "skills", label: t.technicalSkills, icon: Code2 }, { id: "projects", label: t.featuredProjects, icon: FolderKanban }, { id: "contact", label: "Contact", icon: Contact }].map((item) => (
+                      <button key={item.id} onClick={() => { scrollToSection(item.id); setMobileMenuOpen(false) }} className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-left font-medium transition-all duration-300 ${activeSection === item.id ? "bg-primary text-white" : "text-muted-foreground hover:bg-muted"}`}>
                         <item.icon className="w-5 h-5" /><span>{item.label}</span>
                       </button>
                     ))}
                   </div>
                   <div className="mt-auto space-y-3 pt-8">
-                    <Button className="w-full bg-primary" onClick={() => {handleEmailClick(); setMobileMenuOpen(false)}}><Mail className="w-4 h-4 mr-2" />{t.getInTouch}</Button>
-                    <Button variant="outline" className="w-full" onClick={() => {handleResumeDownload(); setMobileMenuOpen(false)}}><Download className="w-4 h-4 mr-2" />{t.downloadResume}</Button>
+                    <Button className="w-full bg-primary" onClick={() => { handleEmailClick(); setMobileMenuOpen(false) }}><Mail className="w-4 h-4 mr-2" />{t.getInTouch}</Button>
+                    <Button variant="outline" className="w-full" onClick={() => { handleResumeDownload(); setMobileMenuOpen(false) }}><Download className="w-4 h-4 mr-2" />{t.downloadResume}</Button>
                   </div>
                 </div>
               </SheetContent>
@@ -300,122 +308,229 @@ export default function Portfolio() {
       </nav>
 
       <div className="w-full">
-        <section id="home" className="min-h-[90vh] flex items-center justify-center px-4 md:px-6 py-20 bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
+        <section id="home" className="min-h-[85vh] flex items-center justify-center px-4 md:px-6 py-12 md:py-16 bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
           <AnimatedGridPattern
-            numSquares={30}
-            maxOpacity={0.15}
+            numSquares={40}
+            maxOpacity={0.2}
             duration={3}
             repeatDelay={1}
             className={cn(
-              "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
-              "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
+              "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
+              "inset-x-0 inset-y-[-20%] h-[140%] skew-y-12 opacity-40",
             )}
           />
-          <div className="absolute top-20 right-10 w-20 h-20 bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-full blur-xl animate-pulse" />
-          <div className="absolute bottom-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "0.5s" }} />
-          <div className="container mx-auto max-w-4xl text-center relative z-10">
-            <div className={`transition-all duration-700 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <div className="relative inline-block mb-8">
-                <div className="w-56 h-56 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl ring-4 ring-primary/20">
-                  <img src="/images/profile-photo.jpg" alt="Nischith S" className="w-full h-full object-cover" />
-                </div>
-                <div className="absolute -bottom-1 -right-1 bg-green-500 w-6 h-6 rounded-full border-4 border-background"></div>
-                <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-primary/90 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold text-white border border-primary/20 whitespace-nowrap">
-                  <Sparkles className="w-4 h-4 inline mr-1" />{t.openToWork}
-                </div>
-              </div>
-            </div>
-            <div className={`transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Nischith S</h2>
-              <p className="text-primary font-semibold text-lg md:text-xl mb-4">{t.computerScienceEngineer}</p>
-              <div className="flex items-center justify-center space-x-2 text-muted-foreground mb-6"><MapPin className="w-4 h-4" /><span className="text-sm">{t.location}</span></div>
-            </div>
-            <div className={`transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">👋 {t.developer}</span>
-            </div>
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-4 md:mb-6 leading-tight transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {t.building}
-            </h1>
-            <p className={`text-base md:text-lg lg:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {t.description}
-            </p>
-            <div className={`flex flex-col sm:flex-row gap-3 md:gap-4 justify-center transition-all duration-700 delay-900 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 text-base md:text-lg px-6 md:px-8" onClick={handleResumeDownload}><Download className="w-5 h-5 mr-2" />{t.downloadResume}</Button>
-              <Button size="lg" variant="outline" className="text-base md:text-lg px-6 md:px-8 border-2" onClick={() => scrollToSection("projects")}>{t.viewProjects}<ArrowRight className="w-5 h-5 ml-2" /></Button>
-            </div>
-            <div className={`flex justify-center space-x-4 mt-8 transition-all duration-700 delay-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {[{icon:Github,link:handleGithubClick},{icon:Linkedin,link:handleLinkedInClick},{icon:Instagram,link:handleInstagramClick},{icon:Mail,link:handleEmailClick}].map((social, index) => (
-                <button key={index} onClick={social.link} className="p-3 bg-black dark:bg-slate-200 hover:bg-gray-800 dark:hover:bg-slate-300 rounded-full transition-all duration-300 hover:scale-110 shadow-lg">
-                  <social.icon className="w-5 h-5 text-white dark:text-slate-900" />
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
+          {/* Decorative Blobs */}
+          <div className="absolute top-10 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-pulse" />
+          <div className="absolute top-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute bottom-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "2s" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <section id="about" className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
-          <AnimatedGridPattern
-            numSquares={20}
-            maxOpacity={0.1}
-            duration={3}
-            repeatDelay={1}
-            className={cn(
-              "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
-              "inset-x-0 inset-y-[-20%] h-[150%]",
-            )}
-          />
-          <div className="container mx-auto max-w-5xl">
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">{t.aboutMe}</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-primary to-purple-500 mx-auto rounded-full" />
-            </div>
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-              <div className="space-y-4">
-                <Card className="border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
-                  <CardHeader className="flex flex-row items-center space-y-0 pb-3">
-                    <div className="w-10 md:w-12 h-10 md:h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-3 md:mr-4"><GraduationCap className="w-5 md:w-6 h-5 md:h-6 text-primary" /></div>
-                    <div><CardTitle className="text-lg md:text-xl">{t.education}</CardTitle><p className="text-sm text-muted-foreground">{t.cse}</p></div>
-                  </CardHeader>
-                  <CardContent><p className="font-bold text-foreground">{t.college}</p><p className="text-primary font-semibold mt-1">{t.cgpa}</p></CardContent>
-                </Card>
-                <Card className="border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
-                  <CardHeader className="flex flex-row items-center space-y-0 pb-3">
-                    <div className="w-10 md:w-12 h-10 md:h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mr-3 md:mr-4"><Briefcase className="w-5 md:w-6 h-5 md:h-6 text-purple-500" /></div>
-                    <div><CardTitle className="text-lg md:text-xl">{t.currentFocus}</CardTitle><p className="text-sm text-muted-foreground">Building Skills</p></div>
-                  </CardHeader>
-                  <CardContent><p className="font-bold text-foreground">{t.focusText}</p><p className="text-muted-foreground mt-1 text-sm">{t.focusDesc}</p></CardContent>
-                </Card>
-                <Card className="border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
-                  <CardHeader>
-                    <CardTitle className="text-lg md:text-xl">{t.languagesKnown || "Languages Known"}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2">
-                      {languagesKnown.map((lang, index) => (
-                        <Badge key={index} variant="secondary" className="text-sm px-3 py-1 bg-primary/10 text-primary">{lang.name} - {lang.level}</Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+          <div className="container mx-auto relative z-10 px-4">
+            <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
+              
+              {/* Main Heading Section - Adjusted */}
+              <div className="space-y-6 relative z-20 mb-8 pt-12">
+                <div className={`transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                  <span className="inline-flex items-center gap-2 px-5 py-2 bg-primary/10 backdrop-blur-md rounded-full text-sm font-black border border-primary/20 shadow-lg text-primary uppercase tracking-widest">
+                    <span className="w-2.5 h-2.5 bg-primary rounded-full animate-ping" />
+                    {t.developer}
+                  </span>
+                </div>
               </div>
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-foreground mb-4">{t.whatIDo || "What I Do"}</h3>
-                {whatIDoItems.map((item, index) => (
-                  <Card key={index} className="border-2 border-primary/10 hover:border-primary/40 transition-all duration-300">
-                    <CardContent className="pt-4">
-                      <div className="flex items-start space-x-4">
-                        <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg`}><item.icon className="w-6 h-6 text-white" /></div>
-                        <div><h4 className="font-bold text-foreground">{item.title}</h4><p className="text-sm text-muted-foreground">{item.description}</p></div>
-                      </div>
-                    </CardContent>
-                  </Card>
+
+              {/* Premium Profile Section - Simplified */}
+              <div className={`flex flex-col md:flex-row items-center gap-12 mb-16 transition-all duration-1000 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                {/* Visual Avatar */}
+                <div className="relative group">
+                  <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl z-10 transition-all duration-500 group-hover:border-primary/50">
+                    <img src="/images/profile-photo.jpg" alt="Nischith S" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    {/* Glass Shine Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
+                  </div>
+                  {/* Status Indicator */}
+                  <div className="absolute bottom-6 right-6 bg-emerald-500 w-7 h-7 rounded-full border-4 border-white dark:border-slate-900 z-20 animate-pulse shadow-green-500/50 shadow-lg" />
+                </div>
+                
+                <div className="text-center md:text-left flex flex-col items-center md:items-start gap-6">
+                  <div className="relative">
+                    <h2 className="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-2 text-foreground">
+                       {translations[language].education === "Education" ? "Nischith S" : "ನಿಶ್ಚಿತ್ ಎಸ್"}
+                    </h2>
+                    {/* Animated Underline */}
+                    <div className="h-2 w-1/3 bg-primary rounded-full group-hover:w-full transition-all duration-500" />
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+                    <div className="px-6 py-2.5 bg-blue-600/10 backdrop-blur-xl border border-blue-600/20 rounded-2xl shadow-xl shadow-blue-600/10 group cursor-default">
+                       <div className="flex items-center gap-3">
+                         <Sparkles className="w-5 h-5 text-blue-600 animate-pulse" />
+                         <span className="text-blue-600 dark:text-blue-400 font-black text-lg md:text-xl uppercase tracking-wider">{t.computerScienceEngineer}</span>
+                       </div>
+                    </div>
+                    
+                    <div className="px-6 py-2.5 bg-slate-500/10 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl flex items-center gap-3">
+                       <MapPin className="w-5 h-5 text-slate-500" />
+                       <span className="text-muted-foreground font-black text-base md:text-lg">{t.location}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 mt-2">
+                    <div className="flex items-center gap-2 group cursor-pointer">
+                       <div className="w-2 h-2 rounded-full bg-blue-600 shadow-blue-600/50 shadow-lg group-hover:scale-150 transition-transform" />
+                       <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground group-hover:text-blue-600 transition-colors">Available For Hire</span>
+                    </div>
+                    <div className="flex items-center gap-2 group cursor-pointer">
+                       <div className="w-2 h-2 rounded-full bg-purple-600 shadow-purple-600/50 shadow-lg group-hover:scale-150 transition-transform" />
+                       <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground group-hover:text-purple-600 transition-colors">Digital Architect</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* About Section Header */}
+              <div id="about" className={`pt-20 pb-10 transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+                <h2 className="text-4xl md:text-6xl font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-blue-600 drop-shadow-sm">
+                  {t.aboutMe}
+                </h2>
+                <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-purple-500 mx-auto mt-4 rounded-full" />
+              </div>
+
+              {/* Digital Hub - Tighter & More Creative */}
+              <div className={`w-full max-w-6xl relative mt-4 mb-8 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 items-center">
+                  
+                  {/* Left Column: Academic */}
+                  <div className="lg:col-span-1 space-y-4 order-2 lg:order-1">
+                    <div className="group relative p-4 bg-background/60 backdrop-blur-3xl rounded-[1.5rem] border border-primary/30 shadow-2xl hover:border-primary transition-all duration-500 hover:-translate-y-1 overflow-hidden">
+                       <div className="absolute top-0 right-0 w-12 h-12 bg-primary/5 rounded-bl-3xl border-b border-l border-primary/20 pointer-events-none" />
+                       <div className="relative z-10">
+                        <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center mb-3 ring-1 ring-primary/30 group-hover:bg-primary group-hover:text-white transition-all">
+                          <GraduationCap className="w-5 h-5" />
+                        </div>
+                        <h4 className="font-black text-foreground text-sm tracking-wide mb-1 uppercase opacity-70">{t.education}</h4>
+                        <p className="text-foreground text-sm font-bold leading-tight">{t.cse}</p>
+                        <p className="text-primary/70 text-[11px] font-bold mt-1">{t.college}</p>
+                       </div>
+                       <div className="absolute bottom-1 right-2 w-8 h-[2px] bg-primary/20 group-hover:w-full transition-all duration-700" />
+                    </div>
+
+                    <div className="group relative p-4 bg-background/60 backdrop-blur-3xl rounded-[1.5rem] border border-purple-500/30 shadow-2xl hover:border-purple-500 transition-all duration-500 hover:-translate-y-1 overflow-hidden bg-gradient-to-br from-background to-purple-500/5">
+                       <div className="relative z-10 flex flex-col">
+                        <div className="flex justify-between items-start mb-2">
+                           <h4 className="font-black text-purple-500 text-xs tracking-[0.2em] uppercase">Academic Index</h4>
+                           <Award className="w-6 h-6 text-purple-500 group-hover:scale-125 transition-transform" />
+                        </div>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-4xl font-black text-foreground drop-shadow-sm">{t.cgpa.split(': ')[1]}</span>
+                          <span className="text-xs font-bold text-muted-foreground uppercase">CGPA</span>
+                        </div>
+                        {/* Creative Progress Bar */}
+                        <div className="w-full h-1.5 bg-muted rounded-full mt-3 overflow-hidden border border-purple-500/10">
+                           <div className="h-full bg-gradient-to-r from-purple-500 to-primary w-[85%] animate-[shimmer_2s_infinite]" />
+                        </div>
+                       </div>
+                    </div>
+                  </div>
+
+                  {/* Center Column: The Robot Interface (Larger & Tighter) */}
+                  <div className="lg:col-span-2 relative order-1 lg:order-2 -mx-4">
+                    <div className="relative z-10 aspect-square max-w-[500px] mx-auto group">
+                      <RobotCanvas />
+                      {/* Interactive Meta-Lines */}
+                      <div className="absolute inset-0 border border-primary/5 rounded-full animate-ping opacity-20" />
+                      <div className="absolute inset-4 border border-purple-500/10 rounded-full animate-[ping_3s_infinite] opacity-10" />
+                    </div>
+                  </div>
+
+                  {/* Right Column: Skills */}
+                  <div className="lg:col-span-1 space-y-4 order-3">
+                    <div className="group relative p-4 bg-background/60 backdrop-blur-3xl rounded-[1.5rem] border border-blue-500/30 shadow-2xl hover:border-blue-500 transition-all duration-500 hover:-translate-y-1">
+                       <div className="relative z-10">
+                        <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center mb-3 ring-1 ring-blue-500/30 group-hover:scale-110 transition-transform">
+                          <Brain className="w-5 h-5 text-blue-500" />
+                        </div>
+                        <h4 className="font-black text-foreground text-sm tracking-wide mb-1 uppercase opacity-70">{t.currentFocus}</h4>
+                        <p className="text-foreground text-sm font-bold leading-tight">{t.focusText}</p>
+                       </div>
+                       <div className="absolute top-2 right-2 flex gap-1">
+                         <div className="w-1 h-1 bg-blue-500 rounded-full animate-pulse" />
+                         <div className="w-1 h-1 bg-blue-500/50 rounded-full animate-pulse delay-75" />
+                         <div className="w-1 h-1 bg-blue-500/30 rounded-full animate-pulse delay-150" />
+                       </div>
+                    </div>
+
+                    <div className="group relative p-4 bg-background/60 backdrop-blur-3xl rounded-[1.5rem] border border-green-500/30 shadow-2xl hover:border-green-500 transition-all duration-500 hover:-translate-y-1">
+                       <div className="relative z-10">
+                        <div className="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center mb-3 ring-1 ring-green-500/30">
+                          <Globe2 className="w-5 h-5 text-green-500" />
+                        </div>
+                        <h4 className="font-black text-foreground text-sm tracking-wide mb-2 uppercase opacity-70">Linguistics</h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {[t.kannada, t.english, t.hindi].map((l, i) => (
+                            <span key={i} className="px-2 py-1 bg-green-500/10 text-green-600 dark:text-green-400 rounded-lg text-[10px] font-black border border-green-500/20 group-hover:bg-green-500 group-hover:text-white transition-all">{l}</span>
+                          ))}
+                        </div>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Simplified & Tighter Action Bar */}
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3 max-w-4xl mx-auto">
+                   {whatIDoItems.map((item, idx) => (
+                     <div key={idx} className="group flex items-center gap-3 p-3 bg-background/50 backdrop-blur-xl rounded-xl border border-border/50 hover:border-primary/40 transition-all duration-300">
+                        <div className={`w-10 h-10 bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform`}>
+                          <item.icon className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="text-left">
+                          <h4 className="font-black text-foreground text-xs leading-tight">{item.title}</h4>
+                          <p className="text-muted-foreground text-[9px] leading-tight mt-0.5">{item.description}</p>
+                        </div>
+                     </div>
+                   ))}
+                </div>
+              </div>
+
+              {/* Call to Actions - Directly Below Digital Hub */}
+              <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center pt-10 transition-all duration-700 delay-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <Button size="lg" className="group relative overflow-hidden bg-primary hover:bg-primary/95 text-white shadow-2xl shadow-primary/30 h-16 px-12 text-xl font-black rounded-2xl transition-all hover:scale-[1.05] active:scale-[0.95]" onClick={handleResumeDownload}>
+                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                  <Download className="w-6 h-6 mr-3 relative z-10 group-hover:animate-bounce" />
+                  <span className="relative z-10">{t.downloadResume}</span>
+                </Button>
+                <Button size="lg" variant="outline" className="h-16 px-12 text-xl font-black rounded-2xl border-2 hover:bg-foreground/5 hover:scale-[1.05] active:scale-[0.95] transition-all" onClick={() => scrollToSection("projects")}>
+                  {t.viewProjects}<ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
+
+              {/* Socials */}
+              <div className={`flex justify-center space-x-6 pt-10 transition-all duration-700 delay-1100 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+                {[{icon:Github,link:handleGithubClick},{icon:Linkedin,link:handleLinkedInClick},{icon:Instagram,link:handleInstagramClick},{icon:Mail,link:handleEmailClick}].map((social, index) => (
+                  <button key={index} onClick={social.link} className="p-5 bg-muted/40 hover:bg-primary/10 rounded-2xl transition-all duration-300 hover:-translate-y-2 border border-border/50 group shadow-lg">
+                    <social.icon className="w-7 h-7 text-foreground/80 group-hover:text-primary transition-colors" />
+                  </button>
                 ))}
               </div>
             </div>
           </div>
         </section>
+      </div>
 
-        <section id="skills" className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
+      <section className="py-20 px-4 md:px-6 relative overflow-hidden bg-muted/30">
+        <div className="container mx-auto max-w-5xl text-center relative z-10">
+          <h2 className="text-4xl md:text-7xl font-black text-foreground leading-[1.1] tracking-tighter mb-8">
+            Building Tomorrow's<br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-blue-600">
+              Digital Future
+            </span>
+          </h2>
+          <p className="text-xl md:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-semibold">
+            Passionate about crafting innovative software solutions, exploring cutting-edge technologies, and creating meaningful digital experiences.
+          </p>
+        </div>
+      </section>
+
+      <section id="skills" className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
           <AnimatedGridPattern
             numSquares={25}
             maxOpacity={0.1}
@@ -510,8 +625,8 @@ export default function Portfolio() {
                         <Github className="w-3 h-3 mr-1" />Code
                       </Button>
                       <div className="relative flex-1">
-                        <Button 
-                          size="sm" 
+                        <Button
+                          size="sm"
                           className={cn(
                             "flex-1 text-xs bg-primary/90 transition-all duration-300 relative overflow-hidden w-full",
                             clickedDemoIndex === index && "scale-95 shadow-lg shadow-primary/50"
@@ -574,8 +689,8 @@ export default function Portfolio() {
                 </button>
 
                 <div className="relative bg-black rounded-lg overflow-hidden shadow-lg" style={{ aspectRatio: "4/3", width: "100%", maxWidth: "380px" }}>
-                  <img 
-                    src={awsMilestoneImages[currentImageIndex].path} 
+                  <img
+                    src={awsMilestoneImages[currentImageIndex].path}
                     alt={awsMilestoneImages[currentImageIndex].name}
                     className="w-full h-full object-contain"
                   />
@@ -672,7 +787,7 @@ export default function Portfolio() {
                     className="w-full px-3 py-2 border border-input rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                     rows={4}
                   />
-                  
+
                   <div className="flex gap-2">
                     <button
                       onClick={handleSuggestionSubmit}
@@ -729,14 +844,6 @@ export default function Portfolio() {
 
         <footer className="bg-gradient-to-r from-primary via-purple-600 to-primary py-8 md:py-12 px-4 md:px-6">
           <div className="container mx-auto max-w-5xl">
-            <div className="text-center mb-6 pb-6 border-b border-white/20">
-              <button
-                onClick={() => setSuggestionOpen(true)}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors font-medium text-sm"
-              >
-                💡 Send Suggestion
-              </button>
-            </div>
             <div className="text-center">
               <p className="text-white font-semibold text-base md:text-lg mb-2">© 2025 NISCHITH.S. All rights reserved.</p>
               <p className="text-white/90 text-sm md:text-base font-semibold">Designed & Built with Next.js, React, Tailwind CSS & Modern Web Technologies</p>
@@ -744,6 +851,5 @@ export default function Portfolio() {
           </div>
         </footer>
       </div>
-    </div>
-  )
-}
+    )
+  }
