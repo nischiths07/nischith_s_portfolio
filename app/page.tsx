@@ -150,6 +150,7 @@ export default function Portfolio() {
   ]
 
   const astroragaImages = [
+    { name: "AstroRaga - AI-Powered Astrology Overview", path: "/images/astroraga.png" },
     { name: "AstroRaga Sanctuary Home (English)", path: "/astroraga/home-en.png" },
     { name: "AstroRaga Sanctuary Home (Kannada)", path: "/astroraga/home-kn.png" },
     { name: "Kundali & User Profile Form", path: "/astroraga/profile.png" },
