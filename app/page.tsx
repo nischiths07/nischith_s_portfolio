@@ -32,6 +32,7 @@ type Project = {
   highlight: string
   image: string
   demoLink?: string
+  galleryImages?: { name: string; path: string }[]
 }
 
 const translations = {
@@ -145,22 +146,33 @@ export default function Portfolio() {
     { name: "Admin Access", path: "/aws-milestone/admin access.png" },
   ]
 
+  const astroragaImages = [
+    { name: "AstroRaga Sanctuary Home (English)", path: "/astroraga/home-en.png" },
+    { name: "AstroRaga Sanctuary Home (Kannada)", path: "/astroraga/home-kn.png" },
+    { name: "Kundali & User Profile Form", path: "/astroraga/profile.png" },
+    { name: "AstroSage AI Cosmic Chat Assistant", path: "/astroraga/astrosage-ai.png" },
+    { name: "About AstroRaga & Spiritual Tech Market", path: "/astroraga/about.png" },
+    { name: "Feedback & Community Suggestions", path: "/astroraga/feedback.png" },
+  ]
+
+  const [currentGallery, setCurrentGallery] = useState<{ name: string; path: string }[]>(astroragaImages)
+
   const t = translations[language]
 
   useEffect(() => { setIsLoaded(true) }, [])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!demoModalOpen) return
+      if (!demoModalOpen || !currentGallery.length) return
       if (e.key === "ArrowLeft") {
-        setCurrentImageIndex((prev) => (prev - 1 + awsMilestoneImages.length) % awsMilestoneImages.length)
+        setCurrentImageIndex((prev) => (prev - 1 + currentGallery.length) % currentGallery.length)
       } else if (e.key === "ArrowRight") {
-        setCurrentImageIndex((prev) => (prev + 1) % awsMilestoneImages.length)
+        setCurrentImageIndex((prev) => (prev + 1) % currentGallery.length)
       }
     }
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [demoModalOpen, awsMilestoneImages.length])
+  }, [demoModalOpen, currentGallery])
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId)
@@ -210,17 +222,28 @@ export default function Portfolio() {
     { title: "Tools", icon: Wrench, skills: ["VS Code", "Docker Hub", "Linux", "Figma"], color: "from-rose-500 to-red-500" },
   ]
 
-  const projects = [
+  const projects: Project[] = [
+    {
+      title: "AstroRaga - Royal Vedic Sanctuary",
+      description: "AI-powered Vedic astrology platform with multilingual support (English & Kannada), birth chart profiles, AstroSage AI guidance, and Neon PostgreSQL database.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "Neon PostgreSQL", "AstroSage AI"],
+      github: "https://github.com/nischiths07",
+      demoLink: "https://astro-raga-n6r7.vercel.app",
+      galleryImages: astroragaImages,
+      category: "Full Stack / AI",
+      highlight: "Live Web App",
+      image: "/images/astroraga.png"
+    },
     { title: "Skin Lesion Detection using Deep Learning & ACO", description: "Medical image classification system using Deep Learning with Ant Colony Optimization for improved accuracy.", tech: ["Python", "Deep Learning", "CNN", "OpenCV"], github: "https://github.com/nischiths07", category: "AI/ML", highlight: "95% Accuracy", image: "/images/skin lesion.png" },
     { title: "Gold Price Prediction System", description: "ML-based predictive analytics system forecasting gold prices using historical data.", tech: ["Python", "ML", "Pandas", "Scikit-learn"], github: "https://github.com/nischiths07", category: "Data Science", highlight: "Time Series", image: "/images/GOLD PREDITION.png" },
     { title: "Farm Management System", description: "Database-driven agricultural platform for tracking crops, inventory, and transactions.", tech: ["MySQL", "DBMS", "SQL", "ER Diagrams"], github: "https://github.com/nischiths07", category: "Database", highlight: "Full CRUD", image: "/images/farm.png" },
-    { title: "Hostel Management (DevOps)", description: "Full-stack hostel management deployed using Docker containers and AWS EC2.", tech: ["Docker", "AWS EC2", "Nginx", "MERN"], github: "https://github.com/nischiths07", demoLink: "/aws-milestone.zip", category: "DevOps", highlight: "Cloud Deployed", image: "/images/sahyadriOps.png" },
+    { title: "Hostel Management (DevOps)", description: "Full-stack hostel management deployed using Docker containers and AWS EC2.", tech: ["Docker", "AWS EC2", "Nginx", "MERN"], github: "https://github.com/nischiths07", demoLink: "/aws-milestone.zip", galleryImages: awsMilestoneImages, category: "DevOps", highlight: "Cloud Deployed", image: "/images/sahyadriOps.png" },
     { title: "Book My Show Clone", description: "Responsive movie booking frontend with seat layout design.", tech: ["HTML", "CSS", "JavaScript", "Responsive"], github: "https://github.com/nischiths07", category: "Web Dev", highlight: "Interactive UI", image: "/images/book-my-show.png" },
     { title: "Govt Scheme Analyzer (NLP)", description: "AI-powered NLP system analyzing government scheme documents.", tech: ["NLP", "AI", "Explainable AI", "System Design"], github: "https://github.com/nischiths07", category: "AI/ML", highlight: "NLP Powered", image: "/images/govt scheme analzyer.png" },
   ]
 
   const stats = [
-    { label: t.projects, value: "6+", icon: Award },
+    { label: t.projects, value: "7+", icon: Award },
     { label: t.technologies, value: "20+", icon: Terminal },
     { label: t.years, value: "3+", icon: Clock },
     { label: "CGPA", value: "8.5", icon: Star },
@@ -620,48 +643,55 @@ export default function Portfolio() {
                         <Badge key={techIndex} variant="outline" className="text-xs px-1.5 md:px-2 py-0.5">{tech}</Badge>
                       ))}
                     </div>
-                    <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" className="flex-1 text-xs" onClick={() => window.open(project.github, "_blank")}>
-                        <Github className="w-3 h-3 mr-1" />Code
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      <Button variant="outline" size="sm" className="flex-1 text-xs font-medium" onClick={() => window.open(project.github, "_blank")}>
+                        <Github className="w-3.5 h-3.5 mr-1" />Code
                       </Button>
-                      <div className="relative flex-1">
+                      
+                      {project.demoLink && (
                         <Button
                           size="sm"
-                          className={cn(
-                            "flex-1 text-xs bg-primary/90 transition-all duration-300 relative overflow-hidden w-full",
-                            clickedDemoIndex === index && "scale-95 shadow-lg shadow-primary/50"
-                          )}
+                          className="flex-1 text-xs font-medium bg-primary hover:bg-primary/90 text-white"
                           onClick={() => {
-                            if (project.demoLink) {
-                              setClickedDemoIndex(index)
-                              setTimeout(() => {
-                                setCurrentImageIndex(0)
-                                setDemoModalOpen(true)
-                                setClickedDemoIndex(null)
-                              }, 300)
+                            if (project.demoLink?.startsWith("http")) {
+                              window.open(project.demoLink, "_blank")
                             } else {
-                              setComingSoonOpen(true)
+                              window.open(project.demoLink, "_blank")
                             }
                           }}
                         >
-                          {clickedDemoIndex === index ? (
-                            <>
-                              <Loader className="w-3 h-3 mr-1 animate-spin" />
-                              Loading
-                            </>
-                          ) : (
-                            <>
-                              <ExternalLink className="w-3 h-3 mr-1" />Demo
-                            </>
-                          )}
+                          <ExternalLink className="w-3.5 h-3.5 mr-1" />
+                          {project.demoLink.startsWith("http") ? "Live App" : "Download"}
                         </Button>
-                        {clickedDemoIndex === index && (
-                          <div className="absolute inset-0 rounded-md pointer-events-none" style={{
-                            animation: "button-ripple 0.6s ease-out",
-                            boxShadow: "0 0 0 0 rgba(79, 143, 255, 0.7)"
-                          }} />
-                        )}
-                      </div>
+                      )}
+
+                      {project.galleryImages && (
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          className="flex-1 text-xs font-medium bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/20"
+                          onClick={() => {
+                            setCurrentGallery(project.galleryImages!)
+                            setCurrentImageIndex(0)
+                            setDemoModalOpen(true)
+                          }}
+                        >
+                          <Eye className="w-3.5 h-3.5 mr-1" />
+                          Screenshots
+                        </Button>
+                      )}
+
+                      {!project.demoLink && !project.galleryImages && (
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="flex-1 text-xs font-medium border border-border/50"
+                          onClick={() => setComingSoonOpen(true)}
+                        >
+                          <ExternalLink className="w-3.5 h-3.5 mr-1" />
+                          Demo
+                        </Button>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -671,63 +701,66 @@ export default function Portfolio() {
         </section>
 
         <Dialog open={demoModalOpen} onOpenChange={setDemoModalOpen}>
-          <DialogContent className="max-w-3xl p-3">
-            <div className="space-y-2">
-              <div className="text-center">
-                <DialogTitle className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">
-                  {awsMilestoneImages[currentImageIndex].name}
-                </DialogTitle>
-              </div>
-
-              <div className="flex items-center justify-center gap-3">
-                <button
-                  onClick={() => setCurrentImageIndex((prev) => (prev - 1 + awsMilestoneImages.length) % awsMilestoneImages.length)}
-                  className="p-1 hover:bg-primary/10 rounded-lg transition-colors"
-                  title="Previous image"
-                >
-                  <ChevronLeft className="w-5 h-5 text-primary" />
-                </button>
-
-                <div className="relative bg-black rounded-lg overflow-hidden shadow-lg" style={{ aspectRatio: "4/3", width: "100%", maxWidth: "380px" }}>
-                  <img
-                    src={awsMilestoneImages[currentImageIndex].path}
-                    alt={awsMilestoneImages[currentImageIndex].name}
-                    className="w-full h-full object-contain"
-                  />
-                  <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-white text-xs font-semibold">
-                    {currentImageIndex + 1}/{awsMilestoneImages.length}
-                  </div>
+          <DialogContent className="max-w-4xl p-4 bg-background/95 backdrop-blur-xl border border-border">
+            {currentGallery && currentGallery.length > 0 && (
+              <div className="space-y-3">
+                <div className="text-center">
+                  <DialogTitle className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">
+                    {currentGallery[currentImageIndex]?.name}
+                  </DialogTitle>
                 </div>
 
-                <button
-                  onClick={() => setCurrentImageIndex((prev) => (prev + 1) % awsMilestoneImages.length)}
-                  className="p-1 hover:bg-primary/10 rounded-lg transition-colors"
-                  title="Next image"
-                >
-                  <ChevronRight className="w-5 h-5 text-primary" />
-                </button>
-              </div>
+                <div className="flex items-center justify-center gap-3">
+                  <button
+                    onClick={() => setCurrentImageIndex((prev) => (prev - 1 + currentGallery.length) % currentGallery.length)}
+                    className="p-2 hover:bg-primary/10 rounded-xl transition-colors"
+                    title="Previous image"
+                  >
+                    <ChevronLeft className="w-6 h-6 text-primary" />
+                  </button>
 
-              <div className="flex justify-center pt-1">
-                <button
-                  onClick={() => {
-                    const link = document.createElement("a")
-                    link.href = awsMilestoneImages[currentImageIndex].path
-                    link.download = `${awsMilestoneImages[currentImageIndex].name}.png`
-                    document.body.appendChild(link)
-                    link.click()
-                    document.body.removeChild(link)
-                  }}
-                  className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors font-medium text-sm"
-                  title="Download image"
-                >
-                  <Download className="w-4 h-4" />
-                  Download
-                </button>
+                  <div className="relative bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl border border-primary/20 flex items-center justify-center p-2" style={{ width: "100%", height: "65vh", maxHeight: "550px" }}>
+                    <img
+                      src={currentGallery[currentImageIndex]?.path}
+                      alt={currentGallery[currentImageIndex]?.name}
+                      className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
+                    />
+                    <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold border border-white/10">
+                      {currentImageIndex + 1} / {currentGallery.length}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => setCurrentImageIndex((prev) => (prev + 1) % currentGallery.length)}
+                    className="p-2 hover:bg-primary/10 rounded-xl transition-colors"
+                    title="Next image"
+                  >
+                    <ChevronRight className="w-6 h-6 text-primary" />
+                  </button>
+                </div>
+
+                <div className="flex justify-center pt-1">
+                  <button
+                    onClick={() => {
+                      const link = document.createElement("a")
+                      link.href = currentGallery[currentImageIndex]?.path
+                      link.download = `${currentGallery[currentImageIndex]?.name}.png`
+                      document.body.appendChild(link)
+                      link.click()
+                      document.body.removeChild(link)
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl transition-colors font-semibold text-sm"
+                    title="Download image"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download Image
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </DialogContent>
         </Dialog>
+
 
         <Dialog open={comingSoonOpen} onOpenChange={setComingSoonOpen}>
           <DialogContent className="max-w-md p-6">
