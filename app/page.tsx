@@ -37,6 +37,7 @@ type Project = {
 
 const translations = {
   en: {
+    name: "Nischith S",
     developer: "Hello, I'm a Developer", building: "Building Tomorrow's Digital Future",
     description: "Passionate about crafting innovative software solutions, exploring cutting-edge technologies, and creating meaningful digital experiences.",
     downloadResume: "Download Resume", viewProjects: "View Projects", aboutMe: "About Me", home: "Home",
@@ -55,6 +56,7 @@ const translations = {
     languagesKnown: "Languages Known", kannada: "Kannada", english: "English", hindi: "Hindi",
   },
   hi: {
+    name: "निश्चिथ एस",
     developer: "नमस्ते, मैं एक डेवलपर हूं", building: "कल के डिजिटल भविष्य का निर्माण",
     description: "अभिनव सॉफ्टवेयर समाधान बनाने, अत्याधुनिक तकनीकों का अन्वेषण करने और सार्थक डिजिटल अनुभव बनाने के लिए उत्सुक।",
     downloadResume: "रिज़्यूमे डाउनलोड करें", viewProjects: "प्रोजेक्ट देखें", aboutMe: "मेरे बारे में", home: "होम",
@@ -65,7 +67,7 @@ const translations = {
     letsCreate: "मिलकर कुछ बनाएं", contactDesc: "मुझे नई संभावनाओं, नवीन परियोजनाओं और प्रौद्योगिकी और डिज़ाइन के बारे में बात करने में हमेशा रुचि होती है।",
     emailMe: "ईमेल करें", linkedIn: "लिंक्डइन", gitHub: "गिटहब", getInTouch: "संपर्क करें",
     projects: "प्रोजेक्ट", technologies: "तकनीक", years: "वर्ष", openToWork: "काम के लिए तैयार",
-    computerScienceEngineer: "कंप्यूटर साइंस इंजीನಿಯರ್", location: "शिमोगा, कर्नाटक",
+    computerScienceEngineer: "कंप्यूटर साइंस इंजीनियर", location: "शिमोगा, कर्नाटक",
     passion: "AI और आधुनिक वेब तकनीकों के साथ अभिनव सॉफ्टवेयर समाधान बनाने में उत्सुक।",
     whatIDo: "मैं क्या करता हूं", creativeSolutions: "क्रिएटिव समाधान", creativeDesc: "वास्तविक समस्याओं को हल करने वाले अभिनव एप्लिकेशन बनाना",
     innovativeTech: "इनोवेटिव टेक", innovativeDesc: "अत्याधुनिक परिणामों के लिए AI/ML और आधुनिक फ्रेमवर्क का उपयोग",
@@ -73,6 +75,7 @@ const translations = {
     languagesKnown: "भाषाएं जानते हैं", kannada: "कन्नड़", english: "अंग्रेज़ी", hindi: "हिंदी",
   },
   kn: {
+    name: "ನಿಶ್ಚಿತ್ ಎಸ್",
     developer: "ಹಲೋ, ನಾನೊಬ್ಬ ಡೆವಲಪರ್", building: "ನಾಳಿನ ಡಿಜಿಟಲ್ ಭವಿಷ್ಯವನ್ನು ನಿರ್ಮಿಸುತ್ತಿದ್ದೇನೆ",
     description: "ನವೀನ ಸಾಫ್ಟ್‌ವೇರ್ ಪರಿಹಾರಗಳನ್ನು ರಚಿಸುವ, ಅತ್ಯಾಧುನಿಕ ತಂತ್ರಜ್ಞಾನಗಳನ್ನು ಅನ್ವೇಷಿಸುವ ಮತ್ತು ಅರ್ಥಪೂರ್ಣ ಡಿಜಿಟಲ್ ಅನುಭವಗಳನ್ನು ರಚಿಸುವ ಉತ್ಸಾಹಿ.",
     downloadResume: "ರೆಜ್ಯೂಮ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ", viewProjects: "ಪ್ರೊಜೆಕ್ಟ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ", aboutMe: "ನನ್ನ ಬಗ್ಗೆ", home: "ಹೋಮ್",
@@ -310,7 +313,7 @@ export default function Portfolio() {
                     <div className="w-20 h-20 mx-auto rounded-full overflow-hidden border-4 border-primary/20 mb-3">
                       <img src="/images/profile-photo.jpg" alt="Nischith S" className="w-full h-full object-cover" />
                     </div>
-                    <h2 className="text-xl font-bold">Nischith S</h2>
+                    <h2 className="text-xl font-bold">{t.name}</h2>
                   </div>
                   <div className="flex flex-col space-y-2">
                     {[{ id: "home", label: t.home, icon: Home }, { id: "about", label: t.aboutMe, icon: User }, { id: "skills", label: t.technicalSkills, icon: Code2 }, { id: "projects", label: t.featuredProjects, icon: FolderKanban }, { id: "contact", label: "Contact", icon: Contact }].map((item) => (
@@ -377,7 +380,7 @@ export default function Portfolio() {
                 <div className="text-center md:text-left flex flex-col items-center md:items-start gap-6">
                   <div className="relative">
                     <h2 className="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-2 text-foreground">
-                       {translations[language].education === "Education" ? "Nischith S" : "ನಿಶ್ಚಿತ್ ಎಸ್"}
+                       {t.name}
                     </h2>
                     {/* Animated Underline */}
                     <div className="h-2 w-1/3 bg-primary rounded-full group-hover:w-full transition-all duration-500" />
