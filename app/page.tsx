@@ -347,9 +347,9 @@ export default function Portfolio() {
             )}
           />
           {/* Decorative Blobs */}
-          <div className="absolute top-10 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-pulse" />
-          <div className="absolute top-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: "1s" }} />
-          <div className="absolute bottom-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "2s" }} />
+          <div className="absolute top-10 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-pulse pointer-events-none" />
+          <div className="absolute top-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-[80px] animate-pulse pointer-events-none" style={{ animationDelay: "1s" }} />
+          <div className="absolute bottom-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-[100px] animate-pulse pointer-events-none" style={{ animationDelay: "2s" }} />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
           <div className="container mx-auto relative z-10 px-4">
@@ -464,8 +464,8 @@ export default function Portfolio() {
                     <div className="relative z-10 aspect-square max-w-[500px] mx-auto group">
                       <RobotCanvas />
                       {/* Interactive Meta-Lines */}
-                      <div className="absolute inset-0 border border-primary/5 rounded-full animate-ping opacity-20" />
-                      <div className="absolute inset-4 border border-purple-500/10 rounded-full animate-[ping_3s_infinite] opacity-10" />
+                      <div className="absolute inset-0 border border-primary/5 rounded-full animate-ping opacity-20 pointer-events-none" />
+                      <div className="absolute inset-4 border border-purple-500/10 rounded-full animate-[ping_3s_infinite] opacity-10 pointer-events-none" />
                     </div>
                   </div>
 
@@ -532,10 +532,22 @@ export default function Portfolio() {
 
               {/* Socials */}
               <div className={`flex justify-center space-x-6 pt-10 transition-all duration-700 delay-1100 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-                {[{icon:Github,link:handleGithubClick},{icon:Linkedin,link:handleLinkedInClick},{icon:Instagram,link:handleInstagramClick},{icon:Mail,link:handleEmailClick}].map((social, index) => (
-                  <button key={index} onClick={social.link} className="p-5 bg-muted/40 hover:bg-primary/10 rounded-2xl transition-all duration-300 hover:-translate-y-2 border border-border/50 group shadow-lg">
+                {[
+                  { icon: Github, href: "https://github.com/nischiths07", label: "GitHub" },
+                  { icon: Linkedin, href: "https://www.linkedin.com/in/nischith-s7/", label: "LinkedIn" },
+                  { icon: Instagram, href: "https://www.instagram.com/creatat_ns1/", label: "Instagram" },
+                  { icon: Mail, href: "mailto:sniscith07@gmail.com", label: "Email", target: "_self" }
+                ].map((social, index) => (
+                  <a 
+                    key={index} 
+                    href={social.href} 
+                    target={social.target || "_blank"} 
+                    rel="noopener noreferrer" 
+                    aria-label={social.label}
+                    className="p-5 bg-muted/40 hover:bg-primary/10 rounded-2xl transition-all duration-300 hover:-translate-y-2 border border-border/50 group shadow-lg"
+                  >
                     <social.icon className="w-7 h-7 text-foreground/80 group-hover:text-primary transition-colors" />
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>
@@ -619,6 +631,15 @@ export default function Portfolio() {
                 <Card key={index} className={`border-2 border-primary/10 hover:border-blue-400/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-blue-500/30 hover:ring-2 hover:ring-blue-400/50 group cursor-pointer ${hoveredProject === index ? 'scale-[1.02] shadow-blue-500/30 ring-2 ring-blue-400/50' : ''}`}
                   onMouseEnter={() => setHoveredProject(index)}
                   onMouseLeave={() => setHoveredProject(null)}
+                  onClick={() => {
+                    if (project.demoLink && project.demoLink.startsWith("http")) {
+                      window.open(project.demoLink, "_blank")
+                    } else if (project.galleryImages) {
+                      setCurrentGallery(project.galleryImages)
+                      setCurrentImageIndex(0)
+                      setDemoModalOpen(true)
+                    }
+                  }}
                 >
                   <div className="aspect-video bg-gradient-to-br from-primary/20 to-purple-500/20 relative overflow-hidden">
                     {project.image ? (
@@ -647,25 +668,25 @@ export default function Portfolio() {
                         <Badge key={techIndex} variant="outline" className="text-xs px-1.5 md:px-2 py-0.5">{tech}</Badge>
                       ))}
                     </div>
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      <Button variant="outline" size="sm" className="flex-1 text-xs font-medium" onClick={() => window.open(project.github, "_blank")}>
-                        <Github className="w-3.5 h-3.5 mr-1" />Code
+                    <div className="flex flex-wrap gap-2 pt-1" onClick={(e) => e.stopPropagation()}>
+                      <Button asChild variant="outline" size="sm" className="flex-1 text-xs font-medium">
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                          <Github className="w-3.5 h-3.5 mr-1" />Code
+                        </a>
                       </Button>
                       
                       {project.demoLink && (
-                        <Button
-                          size="sm"
-                          className="flex-1 text-xs font-medium bg-primary hover:bg-primary/90 text-white"
-                          onClick={() => {
-                            if (project.demoLink?.startsWith("http")) {
-                              window.open(project.demoLink, "_blank")
-                            } else {
-                              window.open(project.demoLink, "_blank")
-                            }
-                          }}
-                        >
-                          <ExternalLink className="w-3.5 h-3.5 mr-1" />
-                          {project.demoLink.startsWith("http") ? "Live App" : "Download"}
+                        <Button asChild size="sm" className="flex-1 text-xs font-medium bg-primary hover:bg-primary/90 text-white">
+                          <a 
+                            href={project.demoLink} 
+                            target={project.demoLink.startsWith("http") ? "_blank" : "_self"} 
+                            rel="noopener noreferrer" 
+                            download={!project.demoLink.startsWith("http") ? true : undefined}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ExternalLink className="w-3.5 h-3.5 mr-1" />
+                            {project.demoLink.startsWith("http") ? "Live App" : "Download"}
+                          </a>
                         </Button>
                       )}
 
@@ -674,7 +695,8 @@ export default function Portfolio() {
                           variant="secondary"
                           size="sm"
                           className="flex-1 text-xs font-medium bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/20"
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation()
                             setCurrentGallery(project.galleryImages!)
                             setCurrentImageIndex(0)
                             setDemoModalOpen(true)
@@ -690,7 +712,10 @@ export default function Portfolio() {
                           size="sm"
                           variant="ghost"
                           className="flex-1 text-xs font-medium border border-border/50"
-                          onClick={() => setComingSoonOpen(true)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setComingSoonOpen(true)
+                          }}
                         >
                           <ExternalLink className="w-3.5 h-3.5 mr-1" />
                           Demo
@@ -859,14 +884,20 @@ export default function Portfolio() {
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">{t.letsCreate}</h2>
               <p className="text-base md:text-lg lg:text-xl text-gray-300 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed">{t.contactDesc}</p>
               <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 flex-wrap">
-                <Button size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold px-6 md:px-8 py-4 md:py-6 text-base md:text-lg shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 transform hover:scale-105" onClick={handleEmailClick}>
-                  <Mail className="w-5 md:w-6 h-5 md:h-6 mr-2" />{t.emailMe}
+                <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold px-6 md:px-8 py-4 md:py-6 text-base md:text-lg shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 transform hover:scale-105">
+                  <a href="mailto:sniscith07@gmail.com">
+                    <Mail className="w-5 md:w-6 h-5 md:h-6 mr-2" />{t.emailMe}
+                  </a>
                 </Button>
-                <Button size="lg" className="bg-[#0077B5] hover:bg-[#005885] text-white font-semibold px-6 md:px-8 py-4 md:py-6 text-base md:text-lg shadow-lg shadow-[#0077B5]/25 hover:shadow-[#0077B5]/40 transition-all duration-300 transform hover:scale-105" onClick={handleLinkedInClick}>
-                  <Linkedin className="w-5 md:w-6 h-5 md:h-6 mr-2" />{t.linkedIn}
+                <Button asChild size="lg" className="bg-[#0077B5] hover:bg-[#005885] text-white font-semibold px-6 md:px-8 py-4 md:py-6 text-base md:text-lg shadow-lg shadow-[#0077B5]/25 hover:shadow-[#0077B5]/40 transition-all duration-300 transform hover:scale-105">
+                  <a href="https://www.linkedin.com/in/nischith-s7/" target="_blank" rel="noopener noreferrer">
+                    <Linkedin className="w-5 md:w-6 h-5 md:h-6 mr-2" />{t.linkedIn}
+                  </a>
                 </Button>
-                <Button size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold px-6 md:px-8 py-4 md:py-6 text-base md:text-lg shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 transform hover:scale-105" onClick={handleGithubClick}>
-                  <Github className="w-5 md:w-6 h-5 md:h-6 mr-2" />{t.gitHub}
+                <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold px-6 md:px-8 py-4 md:py-6 text-base md:text-lg shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 transform hover:scale-105">
+                  <a href="https://github.com/nischiths07" target="_blank" rel="noopener noreferrer">
+                    <Github className="w-5 md:w-6 h-5 md:h-6 mr-2" />{t.gitHub}
+                  </a>
                 </Button>
               </div>
 
