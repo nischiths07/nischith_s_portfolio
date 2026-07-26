@@ -54,6 +54,11 @@ const translations = {
     innovativeTech: "Innovative Tech", innovativeDesc: "Leveraging AI/ML and modern frameworks for cutting-edge results",
     userCentric: "User-Centric Design", userCentricDesc: "Creating intuitive and engaging digital experiences",
     languagesKnown: "Languages Known", kannada: "Kannada", english: "English", hindi: "Hindi",
+    code: "Code", liveApp: "Live App", download: "Download", screenshots: "Screenshots", demo: "Demo",
+    downloadImage: "Download Image", comingSoon: "Under Development!",
+    comingSoonDesc: "This live app demo is currently under active development. I'm working hard on it and will deploy it soon!",
+    comingSoonNote: "⏱️ Expected to be deployed soon. Stay tuned!",
+    gotIt: "Got it, thanks!",
   },
   hi: {
     name: "निश्चिथ एस",
@@ -73,6 +78,11 @@ const translations = {
     innovativeTech: "इनोवेटिव टेक", innovativeDesc: "अत्याधुनिक परिणामों के लिए AI/ML और आधुनिक फ्रेमवर्क का उपयोग",
     userCentric: "यूजर-सेंट्रिक डिज़ाइन", userCentricDesc: "सहज और आकर्षक डिजिटल अनुभव बनाना",
     languagesKnown: "भाषाएं जानते हैं", kannada: "कन्नड़", english: "अंग्रेज़ी", hindi: "हिंदी",
+    code: "कोड", liveApp: "लाइव ऐप", download: "डाउनलोड", screenshots: "स्क्रीनशॉट", demo: "डेमो",
+    downloadImage: "इमेज डाउनलोड करें", comingSoon: "निर्माणाधीन है!",
+    comingSoonDesc: "यह लाइव ऐप डेमो अभी विकास के अधीन है। मैं इस पर काम कर रहा हूं और इसे जल्द ही लाइव करूंगा!",
+    comingSoonNote: "⏱️ जल्द ही लाइव होने की उम्मीद है। जुड़े रहें!",
+    gotIt: "ठीक है, धन्यवाद!",
   },
   kn: {
     name: "ನಿಶ್ಚಿತ್ ಎಸ್",
@@ -92,6 +102,11 @@ const translations = {
     innovativeTech: "ನವೀನ ತಂತ್ರಜ್ಞಾನ", innovativeDesc: "ಅತ್ಯಾಧುನಿಕ ಫಲಿತಾಂಶಗಳಿಗಾಗಿ AI/ML ಮತ್ತು ಆಧುನಿಕ ಫ್ರೇಮ್‌ವರ್ಕ್‌ಗಳನ್ನು ಬಳಸುವುದು",
     userCentric: "ಬಳಕೆದಾರ-ಕೇಂದ್ರಿತ ವಿನ್ಯಾಸ", userCentricDesc: "ಸಹಜ ಮತ್ತು ಆಕರ್ಷಕ ಡಿಜಿಟಲ್ ಅನುಭವಗಳನ್ನು ರಚಿಸುವುದು",
     languagesKnown: "ತಿಳಿದಿರುವ ಭಾಷೆಗಳು", kannada: "ಕನ್ನಡ", english: "English", hindi: "ಹಿಂದಿ",
+    code: "ಕೋಡ್", liveApp: "ಲೈವ್ ಆ್ಯಪ್", download: "ಡೌನ್‌ಲೋಡ್", screenshots: "ಸ್ಕ್ರೀನ್‌ಶಾಟ್‌ಗಳು", demo: "ಡೆಮೊ",
+    downloadImage: "ಚಿತ್ರವನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ", comingSoon: "ಅಭಿವೃದ್ಧಿಯಲ್ಲಿದೆ!",
+    comingSoonDesc: "ಈ ಲೈವ್ ಅಪ್ಲಿಕೇಶನ್ ಡೆಮೊ ಪ್ರಸ್ತುತ ಸಕ್ರಿಯ ಅಭಿವೃದ್ಧಿಯಲ್ಲಿದೆ. ನಾನು దీని ಮೇಲೆ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದೇನೆ ಮತ್ತು ಶೀಘ್ರದಲ್ಲೇ ಲೈವ್ ಮಾಡುತ್ತೇನೆ!",
+    comingSoonNote: "⏱️ ಶೀಘ್ರದಲ್ಲೇ ಲೈವ್ ಆಗುವ ನಿರೀಕ್ಷೆಯಿದೆ. ಜೊತೆಯಾಗಿರಿ!",
+    gotIt: "ಸರಿ, ಧನ್ಯವಾದಗಳು!",
   },
 }
 
@@ -159,7 +174,14 @@ export default function Portfolio() {
     { name: "Feedback & Community Suggestions", path: "/astroraga/feedback.png" },
   ]
 
-  const [currentGallery, setCurrentGallery] = useState<{ name: string; path: string }[]>(astroragaImages)
+  const nischRestoImages = [
+    { name: "Elevated Culinary Artistry - Home & Fine Dining", path: "/nisch-resto/screenshot1.png" },
+    { name: "Table Reservation & Experience Booking System", path: "/nisch-resto/screenshot2.png" },
+    { name: "Gourmet Chef Specials & Interactive Menu", path: "/nisch-resto/screenshot3.png" },
+    { name: "Nisch-Resto Luxury Dark Theme Overview", path: "/nisch-resto/thumbnail.jpg" },
+  ]
+
+  const [currentGallery, setCurrentGallery] = useState<{ name: string; path: string }[]>(nischRestoImages)
 
   const t = translations[language]
 
@@ -227,6 +249,17 @@ export default function Portfolio() {
   ]
 
   const projects: Project[] = [
+    {
+      title: "Nisch-Resto - Fine Dining Sanctuary",
+      description: "Luxury fine dining restaurant platform with interactive menu, table reservation system, chef specials, and elegant responsive design.",
+      tech: ["Next.js", "React", "Tailwind CSS", "JavaScript", "Render"],
+      github: "https://github.com/nischiths07/nisch-resto",
+      demoLink: "https://nisch-resto-07.onrender.com/",
+      galleryImages: nischRestoImages,
+      category: "Full Stack",
+      highlight: "Live Restaurant App",
+      image: "/nisch-resto/thumbnail.jpg"
+    },
     {
       title: "AstroRaga - Royal Vedic Sanctuary",
       description: "AI-powered Vedic astrology platform with multilingual support (English & Kannada), birth chart profiles, AstroSage AI guidance, and Neon PostgreSQL database.",
@@ -669,24 +702,26 @@ export default function Portfolio() {
                       ))}
                     </div>
                     <div className="flex flex-wrap gap-2 pt-1" onClick={(e) => e.stopPropagation()}>
-                      <Button asChild variant="outline" size="sm" className="flex-1 text-xs font-medium">
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                          <Github className="w-3.5 h-3.5 mr-1" />Code
-                        </a>
+                      <Button variant="outline" size="sm" className="flex-1 text-xs font-medium" onClick={(e) => { e.stopPropagation(); window.open(project.github, "_blank") }}>
+                        <Github className="w-3.5 h-3.5 mr-1" />{t.code || "Code"}
                       </Button>
                       
                       {project.demoLink && (
-                        <Button asChild size="sm" className="flex-1 text-xs font-medium bg-primary hover:bg-primary/90 text-white">
-                          <a 
-                            href={project.demoLink} 
-                            target={project.demoLink.startsWith("http") ? "_blank" : "_self"} 
-                            rel="noopener noreferrer" 
-                            download={!project.demoLink.startsWith("http") ? true : undefined}
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <ExternalLink className="w-3.5 h-3.5 mr-1" />
-                            {project.demoLink.startsWith("http") ? "Live App" : "Download"}
-                          </a>
+                        <Button size="sm" className="flex-1 text-xs font-medium bg-primary hover:bg-primary/90 text-white" onClick={(e) => {
+                          e.stopPropagation()
+                          if (project.demoLink!.startsWith("http")) {
+                            window.open(project.demoLink, "_blank")
+                          } else {
+                            const link = document.createElement("a")
+                            link.href = project.demoLink!
+                            link.download = "aws-milestone.zip"
+                            document.body.appendChild(link)
+                            link.click()
+                            document.body.removeChild(link)
+                          }
+                        }}>
+                          <ExternalLink className="w-3.5 h-3.5 mr-1" />
+                          {project.demoLink.startsWith("http") ? (t.liveApp || "Live App") : (t.download || "Download")}
                         </Button>
                       )}
 
@@ -703,7 +738,7 @@ export default function Portfolio() {
                           }}
                         >
                           <Eye className="w-3.5 h-3.5 mr-1" />
-                          Screenshots
+                          {t.screenshots || "Screenshots"}
                         </Button>
                       )}
 
@@ -718,7 +753,7 @@ export default function Portfolio() {
                           }}
                         >
                           <ExternalLink className="w-3.5 h-3.5 mr-1" />
-                          Demo
+                          {t.demo || "Demo"}
                         </Button>
                       )}
                     </div>
@@ -782,7 +817,7 @@ export default function Portfolio() {
                     title="Download image"
                   >
                     <Download className="w-4 h-4" />
-                    Download Image
+                    {t.downloadImage || "Download Image"}
                   </button>
                 </div>
               </div>
@@ -804,23 +839,23 @@ export default function Portfolio() {
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-foreground">Coming Soon!</h3>
-                <p className="text-muted-foreground">
-                  This feature is currently under development and will be available soon. We're working hard to bring you the best experience.
+                <h3 className="text-2xl font-bold text-foreground">{t.comingSoon || "Under Development!"}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {t.comingSoonDesc || "This live app demo is currently under active development. I'm working hard on it and will deploy it soon!"}
                 </p>
               </div>
 
               <div className="bg-primary/5 border border-primary/20 rounded-lg p-3">
                 <p className="text-xs text-muted-foreground font-medium">
-                  ⏱️ Expected to be updated in the coming weeks. Stay tuned!
+                  {t.comingSoonNote || "⏱️ Expected to be deployed soon. Stay tuned!"}
                 </p>
               </div>
 
               <button
                 onClick={() => setComingSoonOpen(false)}
-                className="w-full px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors font-medium"
+                className="w-full px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors font-semibold text-sm"
               >
-                Got it, thanks!
+                {t.gotIt || "Got it, thanks!"}
               </button>
             </div>
           </DialogContent>
