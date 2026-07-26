@@ -181,6 +181,14 @@ export default function Portfolio() {
     { name: "Nisch-Resto Luxury Dark Theme Overview", path: "/nisch-resto/thumbnail.jpg" },
   ]
 
+  const razorpayImages = [
+    { name: "Razorpay Hero - Financial Platform", path: "/razorpay/screenshot1.png" },
+    { name: "RazorpayX Banking & Analytics Dashboard", path: "/razorpay/screenshot2.png" },
+    { name: "Payment Suite & Gateway Features", path: "/razorpay/screenshot3.png" },
+    { name: "Interactive Payment Gateway Checkout Modal", path: "/razorpay/screenshot4.png" },
+    { name: "Payment Success & Transaction Confirmation", path: "/razorpay/screenshot5.png" },
+  ]
+
   const [currentGallery, setCurrentGallery] = useState<{ name: string; path: string }[]>(nischRestoImages)
 
   const t = translations[language]
@@ -250,6 +258,17 @@ export default function Portfolio() {
 
   const projects: Project[] = [
     {
+      title: "Razorpay Website & Payment Gateway Clone",
+      description: "Full-featured Razorpay landing page and interactive payment modal checkout clone built with modern responsive web design.",
+      tech: ["HTML", "CSS", "JavaScript", "Tailwind CSS", "Vercel"],
+      github: "https://github.com/nischiths07",
+      demoLink: "https://razorpay-website-clone-nine.vercel.app/",
+      galleryImages: razorpayImages,
+      category: "Web Dev",
+      highlight: "Live Fintech App",
+      image: "/razorpay/thumbnail.png"
+    },
+    {
       title: "Nisch-Resto - Fine Dining Sanctuary",
       description: "Luxury fine dining restaurant platform with interactive menu, table reservation system, chef specials, and elegant responsive design.",
       tech: ["Next.js", "React", "Tailwind CSS", "JavaScript", "Render"],
@@ -280,7 +299,7 @@ export default function Portfolio() {
   ]
 
   const stats = [
-    { label: t.projects, value: "7+", icon: Award },
+    { label: t.projects, value: "8+", icon: Award },
     { label: t.technologies, value: "20+", icon: Terminal },
     { label: t.years, value: "3+", icon: Clock },
     { label: "CGPA", value: "8.5", icon: Star },
