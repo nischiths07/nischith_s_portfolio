@@ -255,12 +255,12 @@ export default function Portfolio() {
       icon: Code,
       color: "from-blue-500 via-indigo-500 to-cyan-500",
       skills: [
-        { name: "Python", level: 90, badge: "Advanced", desc: "Data Structures, ML Models & Automation" },
-        { name: "JavaScript (ES6+)", level: 92, badge: "Advanced", desc: "Async/Await, DOM & Modern Web APIs" },
-        { name: "TypeScript", level: 85, badge: "Proficient", desc: "Strict Types, Generics & Interfaces" },
-        { name: "C / C++", level: 80, badge: "Proficient", desc: "Algorithms, OOP & Memory Basics" },
-        { name: "Java", level: 82, badge: "Proficient", desc: "OOP, Core Java & System Logic" },
-        { name: "SQL", level: 88, badge: "Advanced", desc: "Relational Queries & Joins" },
+        { name: "Python", desc: "Data Structures, ML Models & Automation" },
+        { name: "JavaScript (ES6+)", desc: "Async/Await, DOM & Modern Web APIs" },
+        { name: "TypeScript", desc: "Strict Types, Generics & Interfaces" },
+        { name: "C / C++", desc: "Algorithms, OOP & Memory Basics" },
+        { name: "Java", desc: "OOP, Core Java & System Logic" },
+        { name: "SQL", desc: "Relational Queries & Joins" },
       ]
     },
     {
@@ -269,12 +269,12 @@ export default function Portfolio() {
       icon: Globe,
       color: "from-emerald-500 via-teal-500 to-green-500",
       skills: [
-        { name: "Next.js 14", level: 90, badge: "Advanced", desc: "App Router, SSR, SSG & Server Actions" },
-        { name: "React.js 18/19", level: 92, badge: "Advanced", desc: "Hooks, Context & Component Architecture" },
-        { name: "Tailwind CSS", level: 95, badge: "Expert", desc: "Glassmorphism, Animations & Responsive UI" },
-        { name: "Node.js & Express", level: 85, badge: "Proficient", desc: "RESTful APIs & Backend Architecture" },
-        { name: "Prisma ORM", level: 84, badge: "Proficient", desc: "Type-safe Data Modeling & Migrations" },
-        { name: "HTML5 / CSS3", level: 95, badge: "Expert", desc: "Semantic Markup, Flexbox & Grid Layouts" },
+        { name: "Next.js 14", desc: "App Router, SSR, SSG & Server Actions" },
+        { name: "React.js 18/19", desc: "Hooks, Context & Component Architecture" },
+        { name: "Tailwind CSS", desc: "Glassmorphism, Animations & Responsive UI" },
+        { name: "Node.js & Express", desc: "RESTful APIs & Backend Architecture" },
+        { name: "Prisma ORM", desc: "Type-safe Data Modeling & Migrations" },
+        { name: "HTML5 / CSS3", desc: "Semantic Markup, Flexbox & Grid Layouts" },
       ]
     },
     {
@@ -283,11 +283,11 @@ export default function Portfolio() {
       icon: Brain,
       color: "from-purple-500 via-fuchsia-500 to-pink-500",
       skills: [
-        { name: "Deep Learning (CNN)", level: 88, badge: "Advanced", desc: "Medical Image Classification & ACO" },
-        { name: "NLP & Explainable AI", level: 85, badge: "Proficient", desc: "Document Analysis & Text Intelligence" },
-        { name: "Scikit-Learn & Pandas", level: 88, badge: "Advanced", desc: "Predictive Modeling & Feature Engineering" },
-        { name: "OpenCV", level: 82, badge: "Proficient", desc: "Image Preprocessing & Computer Vision" },
-        { name: "Time-Series Forecasting", level: 85, badge: "Proficient", desc: "Gold Price Prediction Models" },
+        { name: "Deep Learning (CNN)", desc: "Medical Image Classification & ACO" },
+        { name: "NLP & Explainable AI", desc: "Document Analysis & Text Intelligence" },
+        { name: "Scikit-Learn & Pandas", desc: "Predictive Modeling & Feature Engineering" },
+        { name: "OpenCV", desc: "Image Preprocessing & Computer Vision" },
+        { name: "Time-Series Forecasting", desc: "Gold Price Prediction Models" },
       ]
     },
     {
@@ -296,10 +296,10 @@ export default function Portfolio() {
       icon: Database,
       color: "from-amber-500 via-orange-500 to-red-500",
       skills: [
-        { name: "PostgreSQL / Neon", level: 88, badge: "Advanced", desc: "Cloud Serverless DB & Schema Design" },
-        { name: "MySQL", level: 88, badge: "Advanced", desc: "Relational DBMS & Stored Procedures" },
-        { name: "MongoDB", level: 82, badge: "Proficient", desc: "NoSQL Collections & Document Aggregation" },
-        { name: "Redis", level: 78, badge: "Intermediate", desc: "In-memory Caching & Session Management" },
+        { name: "PostgreSQL / Neon", desc: "Cloud Serverless DB & Schema Design" },
+        { name: "MySQL", desc: "Relational DBMS & Stored Procedures" },
+        { name: "MongoDB", desc: "NoSQL Collections & Document Aggregation" },
+        { name: "Redis", desc: "In-memory Caching & Session Management" },
       ]
     },
     {
@@ -308,11 +308,11 @@ export default function Portfolio() {
       icon: Cloud,
       color: "from-sky-500 via-blue-500 to-cyan-500",
       skills: [
-        { name: "AWS EC2 & S3", level: 85, badge: "Proficient", desc: "Instance Configuration & Cloud Deployments" },
-        { name: "Docker & Containers", level: 88, badge: "Advanced", desc: "Dockerfile, Containerization & Docker Hub" },
-        { name: "Nginx", level: 82, badge: "Proficient", desc: "Reverse Proxy & Load Balancing" },
-        { name: "Git & GitHub CI/CD", level: 90, badge: "Advanced", desc: "Branching, PRs & GitHub Workflows" },
-        { name: "Vercel & Render", level: 92, badge: "Expert", desc: "Automated Production Deployments" },
+        { name: "AWS EC2 & S3", desc: "Instance Configuration & Cloud Deployments" },
+        { name: "Docker & Containers", desc: "Dockerfile, Containerization & Docker Hub" },
+        { name: "Nginx", desc: "Reverse Proxy & Load Balancing" },
+        { name: "Git & GitHub CI/CD", desc: "Branching, PRs & GitHub Workflows" },
+        { name: "Vercel & Render", desc: "Automated Production Deployments" },
       ]
     },
     {
@@ -321,10 +321,10 @@ export default function Portfolio() {
       icon: Wrench,
       color: "from-rose-500 via-pink-500 to-red-500",
       skills: [
-        { name: "VS Code", level: 95, badge: "Expert", desc: "Power Extensions, Debugging & Custom Config" },
-        { name: "Linux / Bash Shell", level: 84, badge: "Proficient", desc: "CLI Operations & System Admin" },
-        { name: "Figma", level: 82, badge: "Proficient", desc: "UI Mockups, Wireframes & Prototypes" },
-        { name: "Postman", level: 88, badge: "Advanced", desc: "API Endpoint Testing & Documentation" },
+        { name: "VS Code", desc: "Power Extensions, Debugging & Custom Config" },
+        { name: "Linux / Bash Shell", desc: "CLI Operations & System Admin" },
+        { name: "Figma", desc: "UI Mockups, Wireframes & Prototypes" },
+        { name: "Postman", desc: "API Endpoint Testing & Documentation" },
       ]
     },
   ]
@@ -762,33 +762,19 @@ export default function Portfolio() {
                         {category.title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-4 pt-2">
+                    <CardContent className="space-y-2.5 pt-2">
                       {category.skills.map((skill, skillIndex) => (
-                        <div key={skillIndex} className="space-y-1.5 group/skill">
-                          <div className="flex justify-between items-center text-xs font-semibold">
-                            <span className="text-foreground font-bold text-sm flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary/70 group-hover/skill:scale-150 transition-transform" />
+                        <div
+                          key={skillIndex}
+                          className="p-3 bg-muted/30 hover:bg-muted/70 border border-border/40 hover:border-primary/30 rounded-xl transition-all duration-300 group/skill"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-foreground font-bold text-sm flex items-center gap-2">
+                              <span className={`w-2 h-2 rounded-full bg-gradient-to-r ${category.color} group-hover/skill:scale-125 transition-transform`} />
                               {skill.name}
                             </span>
-                            <span className={`text-[10px] px-2 py-0.5 rounded-full font-black uppercase border ${
-                              skill.badge === "Expert" ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20" :
-                              skill.badge === "Advanced" ? "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20" :
-                              "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20"
-                            }`}>
-                              {skill.badge}
-                            </span>
                           </div>
-
-                          {/* Skill Level Animated Bar */}
-                          <div className="w-full h-2 bg-muted/60 rounded-full overflow-hidden p-0.5 border border-border/30">
-                            <div
-                              className={`h-full rounded-full bg-gradient-to-r ${category.color} transition-all duration-1000 ease-out group-hover/skill:brightness-125`}
-                              style={{ width: `${skill.level}%` }}
-                            />
-                          </div>
-
-                          {/* Skill Description */}
-                          <p className="text-[11px] text-muted-foreground font-medium leading-tight opacity-80 group-hover/skill:opacity-100 transition-opacity">
+                          <p className="text-[11px] text-muted-foreground font-medium mt-1 pl-4 leading-tight">
                             {skill.desc}
                           </p>
                         </div>
