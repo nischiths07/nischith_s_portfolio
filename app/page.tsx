@@ -190,6 +190,12 @@ export default function Portfolio() {
     { name: "Payment Success & Transaction Confirmation", path: "/razorpay/screenshot5.png" },
   ]
 
+  const railwayImages = [
+    { name: "OpenGL Railway Station Simulation - Infographic Poster", path: "/railway/thumbnail.jpg" },
+    { name: "Day Simulation - Platform & Interactive Controls", path: "/railway/day-simulation.png" },
+    { name: "Night Simulation - Train Arrival & Photometric Lighting", path: "/railway/night-simulation.png" },
+  ]
+
   const [currentGallery, setCurrentGallery] = useState<{ name: string; path: string }[]>(nischRestoImages)
 
   const t = translations[language]
@@ -330,6 +336,17 @@ export default function Portfolio() {
   ]
 
   const projects: Project[] = [
+    {
+      title: "OpenGL Railway Station Simulation",
+      description: "Interactive 3D digital twin of a two-platform railway station built with C++ & OpenGL. Features synchronized signal interlocking, day/night lighting, track circuit mini-map, and emergency lockdown controls.",
+      tech: ["C++", "OpenGL", "GLUT", "Computer Graphics"],
+      github: "https://github.com/nischiths07/railway_station_stimulation-using-opengl-",
+      demoLink: "https://drive.google.com/file/d/1vQCDDLrRDE9x5d4cVcu26oZvNix0fHQK/view?usp=drivesdk",
+      galleryImages: railwayImages,
+      category: "Graphics / C++",
+      highlight: "3D Simulation",
+      image: "/railway/thumbnail.jpg"
+    },
     {
       title: "Razorpay Website & Payment Gateway Clone",
       description: "Full-featured Razorpay landing page and interactive payment modal checkout clone built with modern responsive web design.",
@@ -866,7 +883,7 @@ export default function Portfolio() {
                           }
                         }}>
                           <ExternalLink className="w-3.5 h-3.5 mr-1" />
-                          {project.demoLink.startsWith("http") ? (t.liveApp || "Live App") : (t.download || "Download")}
+                          {project.demoLink.includes("drive.google.com") ? (t.demo || "Demo Video") : project.demoLink.startsWith("http") ? (t.liveApp || "Live App") : (t.download || "Download")}
                         </Button>
                       )}
 
