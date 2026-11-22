@@ -11,7 +11,7 @@ This portfolio highlights my journey as a Computer Science Engineering student, 
 
 🔗 Visit Portfolio
 
-https://nischith-portfolio.vercel.app
+https://nischith-s-portfolio.vercel.app
 
 👨‍💻 About Me
 
@@ -279,6 +279,23 @@ Automatic scheme document analysis
 Eligibility detection
 
 Explainable recommendations
+
+🏆 Hackathons & Competitions
+
+Recognitions and competitive innovation challenges:
+
+🥇 IBM SkillUp Hackathon 2026 – Regional Finalist
+- Achievement: Regional Finalist 🏆
+- Project: NLP based Public Welfare Scheme Matching System
+- Focus: Developed an AI-powered system leveraging Natural Language Processing (NLP) to dynamically match citizens with relevant government welfare schemes based on eligibility parameters and demographic data.
+
+⚡ NEXBUILDON HACK 2026 – Participant
+- Achievement: Participant ⚡
+- Focus: Fast-paced competitive hackathon focused on rapid prototyping, innovative problem-solving, and scalable web architectures.
+
+🚀 OOSC 4.0, IIIT Allahabad – Participant
+- Achievement: Participant 🚀
+- Focus: Open Source Software Competition organized by IIIT Allahabad, contributing to open-source repositories and collaborative software engineering workflows.
 
 🎨 Design & UI Features
 

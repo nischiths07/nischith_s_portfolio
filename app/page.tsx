@@ -14,7 +14,7 @@ import {
   Github, Linkedin, Mail, ExternalLink, Code, Database, Globe, Download, MapPin,
   GraduationCap, Briefcase, Instagram, Sparkles, ArrowRight, Star, Clock, Award,
   Terminal, Brain, Cloud, Wrench, Menu, User, Code2, FolderKanban, Contact, Globe2,
-  Home, Zap, Heart, Lightbulb, ChevronLeft, ChevronRight, X, Loader, Bot, Cpu, Palette, Eye
+  Home, Zap, Heart, Lightbulb, ChevronLeft, ChevronRight, X, Loader, Bot, Cpu, Palette, Eye, Trophy
 } from "lucide-react"
 import dynamic from "next/dynamic"
 
@@ -59,6 +59,8 @@ const translations = {
     comingSoonDesc: "This live app demo is currently under active development. I'm working hard on it and will deploy it soon!",
     comingSoonNote: "⏱️ Expected to be deployed soon. Stay tuned!",
     gotIt: "Got it, thanks!",
+    hackathons: "Hackathons",
+    hackathonsSubtitle: "Competitive hackathons, regional recognitions & open-source challenges",
   },
   hi: {
     name: "निश्चिथ एस",
@@ -83,6 +85,8 @@ const translations = {
     comingSoonDesc: "यह लाइव ऐप डेमो अभी विकास के अधीन है। मैं इस पर काम कर रहा हूं और इसे जल्द ही लाइव करूंगा!",
     comingSoonNote: "⏱️ जल्द ही लाइव होने की उम्मीद है। जुड़े रहें!",
     gotIt: "ठीक है, धन्यवाद!",
+    hackathons: "हैकाथॉन",
+    hackathonsSubtitle: "प्रतिस्पर्धी हैकाथॉन, क्षेत्रीय पहचान और ओपन-सोर्स चुनौतियां",
   },
   kn: {
     name: "ನಿಶ್ಚಿತ್ ಎಸ್",
@@ -107,6 +111,8 @@ const translations = {
     comingSoonDesc: "ಈ ಲೈವ್ ಅಪ್ಲಿಕೇಶನ್ ಡೆಮೊ ಪ್ರಸ್ತುತ ಸಕ್ರಿಯ ಅಭಿವೃದ್ಧಿಯಲ್ಲಿದೆ. ನಾನು దీని ಮೇಲೆ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದೇನೆ ಮತ್ತು ಶೀಘ್ರದಲ್ಲೇ ಲೈವ್ ಮಾಡುತ್ತೇನೆ!",
     comingSoonNote: "⏱️ ಶೀಘ್ರದಲ್ಲೇ ಲೈವ್ ಆಗುವ ನಿರೀಕ್ಷೆಯಿದೆ. ಜೊತೆಯಾಗಿರಿ!",
     gotIt: "ಸರಿ, ಧನ್ಯವಾದಗಳು!",
+    hackathons: "ಹ್ಯಾಕಥಾನ್‌ಗಳು",
+    hackathonsSubtitle: "ಸ್ಪರ್ಧಾತ್ಮಕ ಹ್ಯಾಕಥಾನ್‌ಗಳು, ಪ್ರಾದೇಶಿಕ ಸಾಧನೆಗಳು ಮತ್ತು ಓಪನ್ ಸೋರ್ಸ್ ಸವಾಲುಗಳು",
   },
 }
 
@@ -385,7 +391,58 @@ export default function Portfolio() {
     { title: "Farm Management System", description: "Database-driven agricultural platform for tracking crops, inventory, and transactions.", tech: ["MySQL", "DBMS", "SQL", "ER Diagrams"], github: "https://github.com/nischiths07", category: "Database", highlight: "Full CRUD", image: "/images/farm.png" },
     { title: "Hostel Management (DevOps)", description: "Full-stack hostel management deployed using Docker containers and AWS EC2.", tech: ["Docker", "AWS EC2", "Nginx", "MERN"], github: "https://github.com/nischiths07", demoLink: "/aws-milestone.zip", galleryImages: awsMilestoneImages, category: "DevOps", highlight: "Cloud Deployed", image: "/images/sahyadriOps.png" },
     { title: "Book My Show Clone", description: "Responsive movie booking frontend with seat layout design.", tech: ["HTML", "CSS", "JavaScript", "Responsive"], github: "https://github.com/nischiths07", category: "Web Dev", highlight: "Interactive UI", image: "/images/book-my-show.png" },
-    { title: "Govt Scheme Analyzer (NLP)", description: "AI-powered NLP system analyzing government scheme documents.", tech: ["NLP", "AI", "Explainable AI", "System Design"], github: "https://github.com/nischiths07", category: "AI/ML", highlight: "NLP Powered", image: "/images/govt scheme analzyer.png" },
+    { title: "Govt Scheme Analyzer (NLP)", description: "AI-powered NLP system analyzing government scheme documents and matching citizen eligibility. Regional Finalist at IBM SkillUp Hackathon 2026.", tech: ["NLP", "AI", "Explainable AI", "System Design"], github: "https://github.com/nischiths07", category: "AI/ML", highlight: "IBM Hackathon Finalist", image: "/images/govt scheme analzyer.png" },
+  ]
+
+  const hackathons = [
+    {
+      title: "IBM SkillUp Hackathon 2026",
+      role: "Regional Finalist",
+      badge: "Regional Finalist 🏆",
+      badgeColor: "bg-amber-500/10 text-amber-500 border-amber-500/30",
+      accentBorder: "group-hover:border-amber-500/50",
+      glowColor: "group-hover:shadow-amber-500/20",
+      icon: Trophy,
+      iconBg: "from-amber-500 via-orange-500 to-yellow-500",
+      project: "NLP based Public Welfare Scheme Matching System",
+      description: "Engineered an AI-powered system leveraging Natural Language Processing (NLP) to dynamically match citizens with relevant government welfare schemes based on demographic and eligibility parameters.",
+      tags: ["NLP", "Artificial Intelligence", "Explainable AI", "Python", "System Design"],
+      year: "2026",
+      organizer: "IBM SkillUp",
+      highlight: "Top Regional Project"
+    },
+    {
+      title: "NEXBUILDON HACK 2026",
+      role: "Participant",
+      badge: "Participant ⚡",
+      badgeColor: "bg-blue-500/10 text-blue-500 border-blue-500/30",
+      accentBorder: "group-hover:border-blue-500/50",
+      glowColor: "group-hover:shadow-blue-500/20",
+      icon: Zap,
+      iconBg: "from-blue-500 via-indigo-500 to-cyan-500",
+      project: "Rapid Prototyping & Scalable System Architecture",
+      description: "Collaborated in an intensive, time-constrained hackathon sprint focused on ideating, prototyping, and engineering modern scalable digital products and web architectures.",
+      tags: ["Rapid Prototyping", "Full-Stack Web", "Innovation", "Problem Solving"],
+      year: "2026",
+      organizer: "NEXBUILDON",
+      highlight: "National Hackathon"
+    },
+    {
+      title: "OOSC 4.0, IIIT Allahabad",
+      role: "Participant",
+      badge: "Participant 🚀",
+      badgeColor: "bg-purple-500/10 text-purple-500 border-purple-500/30",
+      accentBorder: "group-hover:border-purple-500/50",
+      glowColor: "group-hover:shadow-purple-500/20",
+      icon: Award,
+      iconBg: "from-purple-500 via-fuchsia-500 to-pink-500",
+      project: "Open Source Software Competition",
+      description: "Participated in the premier Open Source Software Competition (OOSC 4.0) organized by IIIT Allahabad, contributing to open-source software, addressing repository issues, and following agile development workflows.",
+      tags: ["Open Source", "IIIT Allahabad", "Git & GitHub", "Code Contribution"],
+      year: "2026",
+      organizer: "IIIT Allahabad",
+      highlight: "Open Source Challenge"
+    }
   ]
 
   const stats = [
@@ -425,7 +482,7 @@ export default function Portfolio() {
           <div className="flex justify-between items-center">
             <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">NISCHITH.S</h1>
             <div className="hidden lg:flex space-x-1">
-              {[{ id: "home", label: t.home, icon: Home }, { id: "about", label: t.aboutMe, icon: User }, { id: "skills", label: t.technicalSkills, icon: Code2 }, { id: "projects", label: t.featuredProjects, icon: FolderKanban }, { id: "contact", label: "Contact", icon: Contact }].map((item) => (
+              {[{ id: "home", label: t.home, icon: Home }, { id: "about", label: t.aboutMe, icon: User }, { id: "skills", label: t.technicalSkills, icon: Code2 }, { id: "projects", label: t.featuredProjects, icon: FolderKanban }, { id: "hackathons", label: t.hackathons, icon: Trophy }, { id: "contact", label: "Contact", icon: Contact }].map((item) => (
                 <button key={item.id} onClick={() => scrollToSection(item.id)} className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeSection === item.id ? "bg-primary text-white shadow-lg shadow-primary/25" : "text-muted-foreground hover:text-foreground hover:bg-muted"}`}>
                   <item.icon className="w-4 h-4" /><span>{item.label}</span>
                 </button>
@@ -459,7 +516,7 @@ export default function Portfolio() {
                     <h2 className="text-xl font-bold">{t.name}</h2>
                   </div>
                   <div className="flex flex-col space-y-2">
-                    {[{ id: "home", label: t.home, icon: Home }, { id: "about", label: t.aboutMe, icon: User }, { id: "skills", label: t.technicalSkills, icon: Code2 }, { id: "projects", label: t.featuredProjects, icon: FolderKanban }, { id: "contact", label: "Contact", icon: Contact }].map((item) => (
+                    {[{ id: "home", label: t.home, icon: Home }, { id: "about", label: t.aboutMe, icon: User }, { id: "skills", label: t.technicalSkills, icon: Code2 }, { id: "projects", label: t.featuredProjects, icon: FolderKanban }, { id: "hackathons", label: t.hackathons, icon: Trophy }, { id: "contact", label: "Contact", icon: Contact }].map((item) => (
                       <button key={item.id} onClick={() => { scrollToSection(item.id); setMobileMenuOpen(false) }} className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-left font-medium transition-all duration-300 ${activeSection === item.id ? "bg-primary text-white" : "text-muted-foreground hover:bg-muted"}`}>
                         <item.icon className="w-5 h-5" /><span>{item.label}</span>
                       </button>
@@ -918,6 +975,92 @@ export default function Portfolio() {
                           {t.demo || "Demo"}
                         </Button>
                       )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="hackathons" className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 via-primary/5 to-purple-500/5 pointer-events-none" />
+          <AnimatedGridPattern
+            numSquares={20}
+            maxOpacity={0.08}
+            duration={3}
+            repeatDelay={1}
+            className={cn(
+              "[mask-image:radial-gradient(350px_circle_at_center,white,transparent)]",
+              "inset-x-0 inset-y-[-15%] h-[130%] skew-y-3",
+            )}
+          />
+          <div className="container mx-auto max-w-6xl relative z-10">
+            <div className="text-center mb-12 md:mb-16">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 rounded-full text-xs font-extrabold text-amber-500 uppercase tracking-widest mb-3 border border-amber-500/20">
+                <Trophy className="w-3.5 h-3.5 text-amber-500" /> Competitive Coding & Innovations
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                {t.hackathons}
+              </h2>
+              <p className="text-muted-foreground text-base md:text-lg mb-4 max-w-2xl mx-auto">
+                {t.hackathonsSubtitle}
+              </p>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-amber-500 via-primary to-purple-500 mx-auto rounded-full" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {hackathons.map((hack, index) => (
+                <Card
+                  key={index}
+                  className={`border border-border/60 ${hack.accentBorder} bg-background/80 backdrop-blur-xl hover:shadow-2xl ${hack.glowColor} transition-all duration-500 group overflow-hidden flex flex-col justify-between`}
+                >
+                  <CardHeader className="relative pb-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className={`w-12 h-12 bg-gradient-to-br ${hack.iconBg} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ring-2 ring-white/20 flex-shrink-0`}>
+                        <hack.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <Badge variant="outline" className={`text-xs font-bold px-3 py-1 border ${hack.badgeColor}`}>
+                        {hack.badge}
+                      </Badge>
+                    </div>
+
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between text-xs text-muted-foreground font-semibold mb-1">
+                        <span>{hack.organizer}</span>
+                        <span>{hack.year}</span>
+                      </div>
+                      <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                        {hack.title}
+                      </CardTitle>
+                    </div>
+
+                    <div className="pt-2">
+                      <div className="p-2.5 bg-muted/40 rounded-xl border border-border/40">
+                        <span className="text-xs font-bold text-primary block leading-tight">
+                          {hack.project}
+                        </span>
+                      </div>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="space-y-4 pt-1 flex-1 flex flex-col justify-between">
+                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                      {hack.description}
+                    </p>
+
+                    <div>
+                      <div className="flex flex-wrap gap-1.5 pt-2">
+                        {hack.tags.map((tag, tagIndex) => (
+                          <Badge
+                            key={tagIndex}
+                            variant="secondary"
+                            className="text-[11px] font-medium px-2 py-0.5 bg-muted/50 hover:bg-muted"
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

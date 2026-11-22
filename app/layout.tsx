@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'PORTFOLIO.NS1 - Nischith S',
     description: 'Passionate about crafting innovative software solutions, exploring cutting-edge technologies, and creating meaningful digital experiences.',
-    url: 'https://nischith-portfolio.vercel.app',
+    url: 'https://nischith-s-portfolio.vercel.app',
     siteName: 'PORTFOLIO.NS1',
     images: [
       {
